@@ -7,9 +7,9 @@ public class GridManager : MonoBehaviour
     public int width;
     public int height;
 
-    public GameObject cube;
+    public GameObject cube; 
 
-    GameObject[,] grid;
+    GameObject[,] grid; //2d array
 
     public static GridManager instance;
 
@@ -23,15 +23,16 @@ public class GridManager : MonoBehaviour
         } else {
             Destroy(gameObject);
         }
-    }
+    } //to make sure it is only obj
 
     // Start is called before the first frame update
     void Start()
     {
-        grid = new GameObject[width, height];
+        grid = new GameObject[width, height];//defineing 2d array
 
-        GameObject gridHolder = new GameObject("Grid Holder");
+        GameObject gridHolder = new GameObject("Grid Holder");//making a new obj called Grid Holder, put all the boxes in that
 
+        //creating a grid in the gridholder 
         for (int x = 0; x < width; x++){
             for (int y = 0; y < height; y++)
             {
