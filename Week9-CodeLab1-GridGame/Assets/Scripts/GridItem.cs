@@ -10,6 +10,7 @@ public class GridItem : MonoBehaviour
 
     public GameObject randomblock;
     private Material original;
+    private bool isRed = false;
 
     void Awake()
     {
@@ -34,7 +35,7 @@ public class GridItem : MonoBehaviour
     public void ChangeToRed()
     {
         GetComponent<MeshRenderer>().material = materials[3]; // change block color to red
-       
+        isRed = true;
         Debug.Log("change to red");
     }
 
@@ -46,12 +47,21 @@ public class GridItem : MonoBehaviour
 
     void OnMouseDown()
     {
-        if(GridManager.instance.selected == null){
-            GridManager.instance.selected = this;
-            transform.localScale = new Vector3(1, 1, 1);
-        } else {
-            GridManager.instance.Swap(this);
+        if (isRed)
+        {
+            Debug.Log("You Wacked a Mole!");
+            GridManager.instance.ReturnColor();
+            //GridManager.instance.RandomChoose();
+            GameManager.instance.AddScore();
+            GameManager.instance.AddTimeToTimer();
         }
+        //Old Swap stuff from class
+        //if(GridManager.instance.selected == null){
+        //    GridManager.instance.selected = this;
+        //    transform.localScale = new Vector3(1, 1, 1);
+        //} else {
+        //    GridManager.instance.Swap(this);
+        //}
 
         print(name);
     }

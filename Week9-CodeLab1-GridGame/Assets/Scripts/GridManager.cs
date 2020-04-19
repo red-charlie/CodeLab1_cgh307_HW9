@@ -8,18 +8,18 @@ public class GridManager : MonoBehaviour
     public int width;
     public int height;
 
-    public GameObject cube; 
+    public GameObject cube; //The cube object this is assigned to
 
     GameObject[,] grid; //2d array
 
-    public static GridManager instance;
+    public static GridManager instance; //making this the only insance
 
     public GridItem selected;
 
     public float timeTochange = 1f; //how often block colors change
     private float StartTime = 0f;  //when to start count time
 
-    private GridItem previousRedCude = null;
+    private GridItem previousRedCude = null; //previous cube that has turned red
 
 
     void Awake()
@@ -71,7 +71,7 @@ public class GridManager : MonoBehaviour
 
     }
 
-    public void RandomChoose()
+    public void RandomChoose() //Chossing a random cube
     {
         System.Random r1 = new System.Random();
         System.Random r2 = new System.Random();
@@ -87,28 +87,29 @@ public class GridManager : MonoBehaviour
         StartTime = 0f;  //reset the start time to 0
     }
 
-    private void ReturnColor()
+    public void ReturnColor()
     {
         previousRedCude.ReturnColor();
     }
     
 
-    public void Swap(GridItem newItem)
-    {
-        int tempX = newItem.gridX;
-        int tempY = newItem.gridY;
+    //swapping the two items clicked (we're removing this for our whack a mole)
+    //public void Swap(GridItem newItem)
+    //{
+    //    int tempX = newItem.gridX;
+    //    int tempY = newItem.gridY;
 
-        newItem.SetPos(selected.gridX, selected.gridY);
-        newItem.transform.position =
-                    new Vector2(selected.gridX, selected.gridY);
-        grid[tempX, tempY] = newItem.gameObject;
+    //    newItem.SetPos(selected.gridX, selected.gridY);
+    //    newItem.transform.position =
+    //                new Vector2(selected.gridX, selected.gridY);
+    //    grid[tempX, tempY] = newItem.gameObject;
 
-        selected.SetPos(tempX, tempY);
-        selected.transform.position =
-                    new Vector2(tempX, tempY);
-        grid[tempX, tempY] = selected.gameObject;
+    //    selected.SetPos(tempX, tempY);
+    //    selected.transform.position =
+    //                new Vector2(tempX, tempY);
+    //    grid[tempX, tempY] = selected.gameObject;
 
-        selected.transform.localScale = new Vector3(.75f, .75f, .75f);
-        selected = null;
-    }
+    //    selected.transform.localScale = new Vector3(.75f, .75f, .75f);
+    //    selected = null;
+    //}
 }

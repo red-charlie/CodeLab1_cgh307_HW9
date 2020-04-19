@@ -27,4 +27,9 @@ public class Timer : MonoBehaviour
             timeText.text = "Time : " + time.ToString("F");
         }
     }
+
+    public void AddTime()
+    {
+        time += 3;
+    }
 }
