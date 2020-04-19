@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class GridItem : MonoBehaviour
 {
+
     public Material[] materials;
     public int gridX, gridY;
 
-    void Start()
+    public GameObject randomblock;
+    private Material original;
+
+    void Awake()
     {
-        GetComponent<MeshRenderer>().material = 
-            materials[Random.Range(0, materials.Length)];
+        GetComponent<MeshRenderer>().material =
+            materials[Random.Range(0, materials.Length - 1)];
+        original = GetComponent<MeshRenderer>().material;
     }
 
     // Start is called before the first frame update
@@ -20,6 +25,23 @@ public class GridItem : MonoBehaviour
         gridY = y;
 
         name = "X: " + x + " Y: " + y;
+    }
+    void Update()
+    {
+        
+    }
+
+    public void ChangeToRed()
+    {
+        GetComponent<MeshRenderer>().material = materials[3]; // change block color to red
+       
+        Debug.Log("change to red");
+    }
+
+    public void ReturnColor()
+    {
+        GetComponent<MeshRenderer>().material =
+            original;
     }
 
     void OnMouseDown()

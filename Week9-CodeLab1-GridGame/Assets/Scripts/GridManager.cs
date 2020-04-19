@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GridManager : MonoBehaviour
 {
@@ -14,6 +15,12 @@ public class GridManager : MonoBehaviour
     public static GridManager instance;
 
     public GridItem selected;
+
+    public float timeTochange = 1f; //how often block colors change
+    private float StartTime = 0f;  //when to start count time
+
+    private GridItem previousRedCude = null;
+
 
     void Awake()
     {
@@ -43,11 +50,48 @@ public class GridManager : MonoBehaviour
                 grid[x, y].transform.parent = gridHolder.transform;
                 grid[x, y].GetComponent<GridItem>().SetPos(x, y);
             }
+        
         }
 
         Camera.main.transform.position = 
             new Vector3(width / 2, height / 2, -10);
+
+        RandomChoose();
+      
     }
+    private void Update()
+    {
+        StartTime += Time.deltaTime;
+
+        if (StartTime >= timeTochange) //change color when it's time
+        {
+            ReturnColor();  // return to original color
+            RandomChoose();
+        }
+
+    }
+
+    public void RandomChoose()
+    {
+        System.Random r1 = new System.Random();
+        System.Random r2 = new System.Random();
+        int row = r1.Next(0, grid.GetLength(0));
+        int column = r2.Next(0, grid.GetLength(1));
+        var value = grid[row, column];
+
+        Debug.Log("choose a random block");
+
+        previousRedCude = value.GetComponent<GridItem>();
+
+        previousRedCude.ChangeToRed();
+        StartTime = 0f;  //reset the start time to 0
+    }
+
+    private void ReturnColor()
+    {
+        previousRedCude.ReturnColor();
+    }
+    
 
     public void Swap(GridItem newItem)
     {
