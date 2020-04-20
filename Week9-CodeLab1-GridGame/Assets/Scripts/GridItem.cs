@@ -14,8 +14,9 @@ public class GridItem : MonoBehaviour
 
     void Awake()
     {
+        //Set all cubes to blue
         GetComponent<MeshRenderer>().material =
-            materials[Random.Range(0, materials.Length - 1)];
+    materials[0];
         original = GetComponent<MeshRenderer>().material;
     }
 

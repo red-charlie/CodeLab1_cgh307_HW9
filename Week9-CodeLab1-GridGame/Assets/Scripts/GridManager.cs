@@ -91,7 +91,7 @@ public class GridManager : MonoBehaviour
     {
         previousRedCude.ReturnColor();
     }
-    
+
 
     //swapping the two items clicked (we're removing this for our whack a mole)
     //public void Swap(GridItem newItem)
